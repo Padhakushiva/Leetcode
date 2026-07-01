@@ -1,24 +1,38 @@
 class Solution {
 public:
     int longestPalindrome(string s) {
-        int freq[128] = {0};
+        int lower[26] = {0};
+        int higher[26] = {0};
 
-        for (char ch : s) {
-            freq[ch]++;
-        }
-
-        int ans = 0;
-
-        for (int i = 0; i < 128; i++) {
-            
-            if (freq[i] % 2 == 0)
-                ans += freq[i];
+        for(char ch : s) {
+            if(ch >= 'a' && ch <= 'z')
+                lower[ch - 'a']++;
             else
-                ans += freq[i] - 1; 
+                higher[ch - 'A']++;
         }
-        if (ans < s.length())
-            ans++;
 
-        return ans;
+        int count = 0;
+        bool odd = false;
+
+        for(int i = 0; i < 26; i++) {
+
+            if(lower[i] % 2 == 0)
+                count += lower[i];
+            else {
+                count += lower[i] - 1;
+                odd = true;
+            }
+
+            if(higher[i] % 2 == 0)
+                count += higher[i];
+            else {
+                count += higher[i] - 1;
+                odd = true;
+            }
+        }
+
+        if(odd) count++;
+
+        return count;
     }
 };
