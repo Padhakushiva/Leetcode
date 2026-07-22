@@ -1,38 +1,33 @@
 class Solution {
 public:
     int threeSumClosest(vector<int>& nums, int target) {
-
         sort(nums.begin(), nums.end());
 
-        int n = nums.size();
+        int ans = nums[0] + nums[1] + nums[2];
 
-        int closest = nums[0] + nums[1] + nums[2];
-
-        for(int i = 0; i < n - 2; i++) {
-
+        for (int i = 0; i < nums.size() - 2; i++) {
             int left = i + 1;
-            int right = n - 1;
+            int right = nums.size() - 1;
 
-            while(left < right) {
-
+            while (left < right) {
                 int sum = nums[i] + nums[left] + nums[right];
 
-                // Update closest if current sum is nearer to target
-                if(abs(target - sum) < abs(target - closest))
-                    closest = sum;
+                if (abs(target - sum) < abs(target - ans)) {
+                    ans = sum;
+                }
 
-                // Exact match
-                if(sum == target)
-                    return sum;
-
-                else if(sum < target)
+                if (sum < target) {
                     left++;
-
-                else
+                }
+                else if (sum > target) {
                     right--;
+                }
+                else {
+                    return sum;
+                }
             }
         }
 
-        return closest;
+        return ans;
     }
 };
