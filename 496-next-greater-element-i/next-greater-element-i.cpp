@@ -1,30 +1,32 @@
 class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        
+
         vector<int> ans;
 
-        for (int x : nums1) {
+        for(int i : nums1){
 
-            int index = -1;
-            for (int i = 0; i < nums2.size(); i++) {
-                if (nums2[i] == x) {
-                    index = i;
+            // Find index of i in nums2
+            int idx = -1;
+
+            for(int j = 0; j < nums2.size(); j++){
+                if(nums2[j] == i){
+                    idx = j;
                     break;
                 }
             }
 
-            int nextGreater = -1;
+            // Find next greater element
+            int greater = -1;
 
-
-            for (int i = index + 1; i < nums2.size(); i++) {
-                if (nums2[i] > x) {
-                    nextGreater = nums2[i];
+            for(int j = idx + 1; j < nums2.size(); j++){
+                if(nums2[j] > i){
+                    greater = nums2[j];
                     break;
                 }
             }
 
-            ans.push_back(nextGreater);
+            ans.push_back(greater);
         }
 
         return ans;
