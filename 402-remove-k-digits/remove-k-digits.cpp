@@ -23,8 +23,13 @@ public:
 
         reverse(ans.begin(), ans.end());
         int i=0;
-        while(i<ans.size() && ans[i]=='0'){
-            i++;
+        while(i<ans.size()){
+            if(ans[i]=='0'){
+                i++;
+            }
+            else{
+                break;
+            }
         }
         ans=ans.substr(i);
         return ans.empty() ? "0" : ans ;
